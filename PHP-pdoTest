@@ -1,0 +1,160 @@
+<?php
+# PDO =  PHP DATA OBJECT
+# connect with database file
+include "./database/db.php";
+// can also use require
+
+# can't write now() in execute method
+# so set var
+$date = new DateTime('now');
+// New keyword is used to CREATE an instance of an OBJECT that has a constructor function. 
+// On calling the constructor function with 'new' operator, 
+// the following actions are taken: A new empty object is created.
+$now = $date->format('Y-m-d H:i:s');
+
+# ***WITHOUT EXECUTE , IT WON'T BE WORKING 
+# ***After adding data , go to chrome , select page link on tab and click enter button once . 
+# By doing this , my sql will automatically add your datas written in vs code to php admin table
+
+/*
+
+# ADDING DATA IN MY SQL #
+
+# write QUERY(sql) FIRST 
+# you also write query on myphpadmin page
+# in vs code , you should write like this
+
+# (1) ? form 
+
+$sql = "INSERT INTO users(name,email,password,address,created_date,updated_date) VALUES (?,?,?,?,?,?)";
+# If you wanna add data (whatever you want) later , you can give ? as value now
+# you can fill data in those ? places when you want
+
+# prepare first and add later
+
+# pdo prepare(query)
+$statement = $pdo->prepare($sql);
+
+# adding data with   $var->execute
+# add new data 
+$statement->execute(["user13", "user13@gamil.com", "34567", "ygn", $now, $now]);
+
+# in above cases , pdoand statement in second line are both obj so use -> this sign
+*/
+
+
+# another way for adding data in mysql >> 
+// BINDING :name
+/*
+$sql = "INSERT INTO users(name,email,password,address,created_date,updated_date) VALUES (:name,:email,:password,:address,:created_date,:updated_date)";
+$statement = $pdo->prepare($sql);
+# write in an associate array
+$statement->execute([
+    ":name" => "ana",
+    ":password" => "ioy5tyu",
+    ":email" => "ana@gmail.com",
+    ":address" => "ygn",
+    ":created_date" => $now,
+    ":updated_date" => $now,
+]);
+*/
+
+# another binding way >> by BINDVALUE METHOD - built in method
+/*
+$sql = "INSERT INTO users(name,email,password,address,created_date,updated_date) VALUES (:name,:email,:password,:address,:created_date,:updated_date)";
+$statement = $pdo->prepare($sql);
+
+# PDO::PARAM_ Represents data type.
+# PDO::PARAM_STR (int) Represents the SQL CHAR, VARCHAR, or other string data type.
+# fill datatype behind PDO:: 
+$statement->bindValue(":name", "ban", PDO::PARAM_STR);
+$statement->bindValue(":email", "ban@gmail.com", PDO::PARAM_STR);
+$statement->bindValue(":password", "6tgyujio", PDO::PARAM_STR);
+$statement->bindValue(":address", "bago", PDO::PARAM_STR);
+$statement->bindValue(":created_date", "$now", PDO::PARAM_STR);
+$statement->bindValue(":updated_date", "$now", PDO::PARAM_STR);
+$statement->execute(); # execute with empty ()
+*/
+
+# another binding way >> by BINDPARAM METHOD - built in method
+/*
+$sql = "INSERT INTO users(name,email,password,address,created_date,updated_date) VALUES (:name,:email,:password,:address,:created_date,:updated_date)";
+$statement = $pdo->prepare($sql);
+
+# bind with bindParam()
+# *****  param can't accept string value , it only accept $variable.
+# write $now with no ""
+
+$name = "cc";
+$email = "cc@gmail.com";
+$password = "4r5t6y7u";
+$address = "mdy";
+
+$statement->bindParam(":name", $name, PDO::PARAM_STR);
+$statement->bindParam(":email", $email, PDO::PARAM_STR);
+$statement->bindParam(":password", $password, PDO::PARAM_STR);
+$statement->bindParam(":address", $address, PDO::PARAM_STR);
+$statement->bindParam(":created_date", $now, PDO::PARAM_STR);
+$statement->bindParam(":updated_date", $now, PDO::PARAM_STR);
+$statement->execute();
+*/
+
+# SELECT FROM WHERE & FetchAll method #
+/*
+$sql = "SELECT * FROM users WHERE user_id in (?,?,?)";
+$statement = $pdo->prepare($sql);
+
+# insert data , here user_id no
+$statement->execute([2, 4, 6]);
+
+# print data with FETCHALL
+$res = $statement->fetchAll(PDO::FETCH_ASSOC); // get associate array
+# need looping when you wanna get inside element like name or email
+echo "<pre>";
+print_r($res);
+echo "</pre>";
+*/
+
+# SELECT FROM WHERE & Fetchဆွဲယူ/ရယူ method #
+// FETCH
+$sql = "SELECT * FROM users WHERE user_id in (?,?,?)";
+$statement = $pdo->prepare($sql);
+$statement->execute([2, 4, 6]);
+
+# print data with FETCH
+$res = $statement->fetch();
+echo "<pre>";
+print_r($res['email']); // res is array so can called with []index looping it
+echo "<br>";
+print_r($res['name']);
+echo "<br>";
+print_r($res['address']);
+echo "</pre>";
+
+
+# SELECT FROM WHERE & bindParam method #
+# it quite similar to search method
+// FETCHALL
+$sql = "SELECT * FROM users WHERE user_id=:user_id";
+$statement = $pdo->prepare($sql);
+
+# *****  param can't accept string value , it only accept $variable. so construct var to replace at :user_id bind name
+$user_id = 2;
+$statement->bindParam(":user_id", $user_id, PDO::PARAM_INT);
+$statement->execute();
+$res = $statement->fetchAll();
+
+echo "<pre>";
+print_r($res);
+echo "<br>";
+
+// LIKE , FETCHALL
+$sql = "SELECT * FROM users WHERE name LIKE :pattern";
+$statement = $pdo->prepare($sql);
+
+$pattern = "%c%";
+$statement->bindParam(":pattern", $pattern, PDO::PARAM_STR);
+$statement->execute();
+$res = $statement->fetchAll();
+echo "<pre>";
+print_r($res);

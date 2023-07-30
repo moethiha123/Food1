@@ -1,0 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Bungee+Spice&display=swap");
+* {
+  list-style: none;
+}
+
+.carousel-item img {
+  height: 70vh !important;
+  object-fit: cover;
+}
