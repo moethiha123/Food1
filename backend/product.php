@@ -5,6 +5,7 @@
         <tr class="text-primary">
             <th>ProductId</th>
             <th>Name</th>
+            <th>Feature</th>
             <th>Description</th>
             <th>Price</th>
             <th>Photo</th>
@@ -14,7 +15,7 @@
     <tbody>
         <?php
         $record_per_page = 5; // Number of items to display per page
-        $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+        $page = isset($_GET['pagep']) ? intval($_GET['pagep']) : 1;
         $start_page = ($page - 1) * $record_per_page;
         $product_qry = "SELECT * FROM products ORDER BY product_id DESC LIMIT :start_page,:record_per_page  ";
         $s = $pdo->prepare($product_qry);
@@ -31,7 +32,9 @@
                 </td>
                 <td>
                     <p class="fw-bold mb-1"><?= $product['name'] ?></p>
-
+                </td>
+                <td>
+                    <p class="fw-bold mb-1"><?= $product['is_featured'] === 1 ? 'Featured' :'Not Featured' ?></p>
                 </td>
                 <td>
                     <p class="fw-normal mb-1"><?= $product['description'] ?></p>
@@ -62,19 +65,17 @@
     $total_pages = ceil($total_records / $record_per_page);
     echo '<div>';
     if ($page > 1) {
-        echo '<a href="?page=' . ($page - 1) . '">Previous</a> ';
+        echo '<a href="?pagep=' . ($page - 1) . '">Previous</a> ';
     }
-
     for ($i = 1; $i <= $total_pages; $i++) {
         if ($i === $page) {
             echo '<span>' . $i . '</span> ';
         } else {
-            echo '<a href="?page=' . $i . '">' . $i . '</a> ';
+            echo '<a href="?pagep=' . $i . '">' . $i . '</a> ';
         }
     }
-
     if ($page < $total_pages) {
-        echo '<a href="?page=' . ($page + 1) . '">Next</a>';
+        echo '<a href="?pagep=' . ($page + 1) . '">Next</a>';
     }
     echo '</div>';
     ?>

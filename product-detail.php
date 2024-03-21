@@ -24,17 +24,17 @@ $res = $s->fetch(PDO::FETCH_ASSOC);
             <p class="mb-3  "><span class="fw-bold me-2 ">Description
                     :</span><?= $res['description'] ?></p>
             <h1 class="text-success mb-4 mt-4 fs-2">Price : <?= $res['price'] ?></h1>
-            <div class="Quantity mt-4 fw-bold">
+            <!-- <div class="Quantity mt-4 fw-bold">
                 <span class="me-3">Quantity</span>
                 <button type="button" class="btn btn-outline-primary  py-0  bg-primary text-light fw-bold" id="minus"
                     data-mdb-ripple-color="dark" style="padding-left: 5px;padding-right:5px;cursor: pointer;">-</button>
                 <span class="me-2 ms-2 fw-bold" style="pointer-events: none;" id="quantity">1</span>
                 <button type="button" class="btn btn-outline-primary px-1 py-0 bg-primary text-light fw-bold" id="plus"
                     style="cursor: pointer;" data-mdb-ripple-color=" dark">+</button>
-            </div>
+            </div> -->
             <div class="detail-btns mt-5 d-flex gap-4 float-start">
-                <a href="" class="bg-primary py-2 px-4 text-white border rounded ">Buy
-                    Now</a>
+                <!-- <a href="" class="bg-primary py-2 px-4 text-white border rounded ">Buy
+                    Now</a> -->
                 <a href="add-to-cart.php?id=<?php echo $res['product_id'] ?>" class="btn btn-default add-to-cart"><i
                         class="fa fa-shopping-cart"></i>Add
                     to cart</a>

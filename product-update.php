@@ -3,7 +3,6 @@ require "./database/db.php";
 ?>
 <?php
 $errors = [];
-
 if (isset($_POST['update'])) {
     $pid = $_POST['product_id'];
     $category_id = $_POST['category_id'];
@@ -43,7 +42,7 @@ if (isset($_POST['update'])) {
         // execute
         $res = $statement->execute();
         if ($res) {
-            header("location:admin-dashboard.php?page=2&#products");
+            header("location:admin-dashboard.php?#products");
         } else {
             die('error');
         }

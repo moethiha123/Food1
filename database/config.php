@@ -6,5 +6,5 @@
 $host = "localhost";
 $user = "root";
 $password = "";
-$dbname = "php_loginUser";
+$dbname = "eco-app";
 // put name of folder that  you created in my sql

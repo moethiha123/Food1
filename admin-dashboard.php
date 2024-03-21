@@ -20,7 +20,6 @@ echo $auth;
                 <li class="mb-3"><a href="#products">Products</a></li>
                 <li class="mb-3"><a href="#categories">Categories</a></li>
                 <li class="mb-3"><a href="order_list.php">Order List</a></li>
-
             </ul>
         </div>
         <div class="col-md-9">

@@ -5,15 +5,15 @@ $date = new DateTime('now');
 $date = $date->format("Y-m-d H:i:s");
 
 require "./database/db.php";
-require "./partials/header.php";
-require "./partials/navbar.php";
+
 if (isset($_POST['order'])) {
+
     $name = trim($_POST['name']);
     $email = trim($_POST['email']);
     $phone = trim($_POST['phone']);
     $address = trim($_POST['address']);
     $status = 0;
-    $sql = "INSERT INTO customers (name,email,phone,address,status,created_date,updated_date) VALUES (:name,:email,:phone,:address,:status,:created_date,:updated_date)";
+    $sql = "INSERT INTO customers (customer_id,name,email,phone,address,status,created_date,updated_date) VALUES (null,:name,:email,:phone,:address,:status,:created_date,:updated_date)";
     $s = $pdo->prepare($sql);
     $s->bindParam(":name", $name, PDO::PARAM_STR);
     $s->bindParam(":email", $email, PDO::PARAM_STR);
@@ -22,9 +22,8 @@ if (isset($_POST['order'])) {
     $s->bindParam(":status", $status, PDO::PARAM_STR);
     $s->bindParam(":created_date", $date, PDO::PARAM_STR);
     $s->bindParam(":updated_date", $date, PDO::PARAM_STR);
-
-
     $s->execute();
+    // die("here");
     $customerid = $pdo->lastInsertId();
     foreach ($_SESSION['cart'] as $product_id => $qty) {
         $order_item_qry = "INSERT INTO order_items (customer_id,product_id,qty) VALUES (:customer_id,:product_id,:qty)";
@@ -33,8 +32,15 @@ if (isset($_POST['order'])) {
         $s->bindParam(":product_id", $product_id, PDO::PARAM_INT);
         $s->bindParam(":qty", $qty, PDO::PARAM_STR);
         $s->execute();
+        if($s){
+            header('location:index.php?message=success');
+        }else{
+            echo "hello";
+        }
     }
 }
+require "./partials/header.php";
+require "./partials/navbar.php";
 
 ?>
 

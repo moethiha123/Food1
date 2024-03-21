@@ -31,9 +31,10 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             $res = $statement->fetch();
 
 
-            if ($email === "admin@gmail.com" && $password === "admin") {
+            if ($email === "admin@admin.com" && $password === "admin") {
                 //add session_start on top of this page
                 $_SESSION['admin'] = "admin";
+                $_SESSION['name'] = "admin";
                 header("location:admin-dashboard.php");
             } else {
                 if ($res) {
@@ -58,7 +59,10 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     }
 }
 require "./partials/navbar.php";
+// require "./partials/carousel.php";
 ?>
+
+
 
 <div class="main p-5 ">
     <form action="login.php" class="w-50 m-auto p-5 m-5 shadow" method="post">

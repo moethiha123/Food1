@@ -6,15 +6,8 @@ require "./partials/header.php";
 
 $date = new DateTime('now');
 $now = $date->format("Y-m-d H:i:s");
-
 $errors = [];
-// also connect error css in html where you wanna place
-// CHECK SERVER METHOD
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
-    // don't need isset to check method'name;
-    // echo "yes";
-    // die();
-    // isset 
     if (isset($_POST['register'])) {
         $name = trim($_POST['name']);
         $email = trim($_POST['email']);
@@ -24,9 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         $pname = $_FILES['photo']['name'];
         $tmpname = $_FILES['photo']['tmp_name'];
         move_uploaded_file($tmpname, "Image/$pname");
-        //ဒီvarတွေကို formမှာ သက်ဆိုင်ရာ အချက်တွေဖြည့်ပြီး ကို registerနိပ်မှ တန်ဖိုးသိရမှာ် 
-        // because form မှာ ဖြည့်လာတဲ့ တန်ဖိုးတွေနဲ့ ဖမ်းထားလို့  
-
         // check error part by empty method
         // empty() = Determine whether a variable is empty
         empty($name) ? $errors[] = "name required..." : "";
@@ -80,11 +70,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 }
 require "./partials/navbar.php";
 ?>
-
-
-
-
-
 <div class="main p-5 ">
     <form action="register.php" class="w-50 m-auto p-5 m-5 shadow" method="post" enctype="multipart/form-data">
         <!-- input type="file" / ပုံပါရင် မဖြစ်မနေ enctype="multipartထည့် -->

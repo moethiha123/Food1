@@ -3,7 +3,6 @@ require("./database/db.php");
 $id = $_GET["id"];
 $tbname = $_GET["tbname"];
 $tbid = $_GET["tbid"];
-
 function delete($tbname, $tbid, $id)
 {
     global $pdo;
@@ -15,6 +14,4 @@ function delete($tbname, $tbid, $id)
         header('location:admin-dashboard.php');
     }
 }
-
-
 delete($tbname, $tbid, $id);

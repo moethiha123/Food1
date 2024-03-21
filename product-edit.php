@@ -2,9 +2,7 @@
 // DATABAST FILE MUST PUT FIRST
 require "./database/db.php";
 require "./partials/header.php";
-
 $errors = [];
-
 $product_id = $_GET['id'];
 $productEdit_qry = "SELECT * FROM products WHERE product_id=:id";
 $s = $pdo->prepare($productEdit_qry);
@@ -23,14 +21,9 @@ require "./partials/navbar.php";
         <!-- join error where you wanna show error alert in html -->
         <h1 class="text-center mb-5">Edit Product Details</h1>
         <input type="hidden" name="pid" value="<?php echo $product['category_id'] ?>">
-        <!-- <div class="mb-3">
-            <input type="text" placeholder="Category Id.." name="category_id" value="<?= $product['category_id'] ?>"
-                class="form-control">
-        </div> -->
         <input type="hidden" name="product_id" value="<?= $product['product_id'] ?>">
         <div class="mb-3">
             <select name="category_id" class="form-control">
-                <!-- <option value="" name="name" disabled selected>Select Category Name</option> -->
                 <?php
                 $sql = "SELECT * FROM categories";
                 $s = $pdo->prepare($sql);
@@ -41,10 +34,10 @@ require "./partials/navbar.php";
                         <option selected value="<?= $value['category_id'] ?>" class="form-control">
                             <?= $value['name'] ?></option>
                     <?php else : ?>
+                        <option value="<?= $value['category_id'] ?>">
+                            <?= $value['name'] ?>
+                        </option>
                     <?php endif ?>
-                    <option value="<?= $value['category_id'] ?>">
-                        <?= $value['name'] ?>
-                    </option>
                 <?php } ?>
             </select>
         </div>
@@ -59,7 +52,11 @@ require "./partials/navbar.php";
                 <input type="text" placeholder="Price.." name="price" value="<?= $product['price'] ?>" class="form-control">
             </div>
             <div class="mb-3">
-                <input type="radio" name="featured" value="1">
+                <?php if ($product['featured'] == 1) : ?>
+                    <input type="checkbox" name="featured" checked value="1">
+                <?php else : ?>
+                    <input type="checkbox" name="featured" value="1">
+                <?php endif ?>
                 <label for="">Feature</label>
             </div>
             <div class="mb-3">
