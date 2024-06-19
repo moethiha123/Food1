@@ -1,25 +1,37 @@
-<div id="carouselExampleControls" class="carousel slide" data-mdb-ride="carousel">
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="https://images.unsplash.com/photo-1633464129147-777bdcc97c1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=884&q=80"
-                style="object-fit:cover;" class="d-block w-100" alt="Wild Landscape" />
+            <img src="https://images.pexels.com/photos/20309830/pexels-photo-20309830/free-photo-of-common-buckeye-junonia-coenia.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>First slide label</h5>
+                <p>Some representative placeholder content for the first slide.</p>
+            </div>
         </div>
         <div class="carousel-item">
-            <img src="https://static.vecteezy.com/system/resources/previews/002/006/605/original/paper-art-shopping-online-on-smartphone-and-new-buy-sale-promotion-pink-backgroud-for-banner-market-ecommerce-free-vector.jpg"
-                style="" class="d-block " alt="Camera" />
+            <img src="https://images.pexels.com/photos/20309830/pexels-photo-20309830/free-photo-of-common-buckeye-junonia-coenia.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Second slide label</h5>
+                <p>Some representative placeholder content for the second slide.</p>
+            </div>
         </div>
         <div class="carousel-item">
-            <img src="https://images.unsplash.com/photo-1611403570720-162d8829689a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDd8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=500&q=60"
-                class="d-block w-100" style="object-position:center;" alt="Exotic Fruits" />
+            <img src="https://images.pexels.com/photos/20309830/pexels-photo-20309830/free-photo-of-common-buckeye-junonia-coenia.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Third slide label</h5>
+                <p>Some representative placeholder content for the third slide.</p>
+            </div>
         </div>
     </div>
-    <button class="carousel-control-prev" type="button" data-mdb-target="#carouselExampleControls"
-        data-mdb-slide="prev">
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
     </button>
-    <button class="carousel-control-next" type="button" data-mdb-target="#carouselExampleControls"
-        data-mdb-slide="next">
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
     </button>

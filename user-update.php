@@ -25,18 +25,13 @@ if (isset($_POST['update'])) {
     empty($pname) ? $errors[] = "photo required..." : "";
 
     if (count($errors) === 0) {
-        // die('right');
-        // UPDATE SET QRY
         $updateqry = "UPDATE  users SET name=:name , email=:email, address=:address , photo=:photo WHERE user_id=:user_id";
-        // add require db.php which contains $pdo
         $statement = $pdo->prepare($updateqry);
-        // bind 
         $statement->bindParam(":name", $name, PDO::PARAM_STR);
         $statement->bindParam(":email", $email, PDO::PARAM_STR);
         $statement->bindParam(":address", $address, PDO::PARAM_STR);
         $statement->bindParam(":photo", $pname, PDO::PARAM_STR);
         $statement->bindParam(":user_id", $uuid, PDO::PARAM_STR);
-        // execute
         $res = $statement->execute();
         if ($res) {
             header("location:admin-dashboard.php");

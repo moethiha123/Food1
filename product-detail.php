@@ -1,8 +1,8 @@
 <?php
-$product_id = $_GET['id'];
 require "./database/db.php";
 require "./partials/header.php";
 require "./partials/navbar.php";
+$product_id = $_GET['id'];
 $detail_sql = "SELECT * FROM products WHERE product_id=$product_id";
 $s = $pdo->prepare($detail_sql);
 $s->execute();
@@ -18,26 +18,17 @@ $res = $s->fetch(PDO::FETCH_ASSOC);
         </div>
 
         <div class="col-8 shadow py-3 px-5 ">
-            <h2 class="mb-5 mt-3 text-danger fw-bold fs-1" style="font-family: 'Bungee Spice', cursive;">
+            <h2 class="mb-5 mt-3 text-danger fw-bold fs-1" >
                 <?= $res['name'] ?>
             </h2>
             <p class="mb-3  "><span class="fw-bold me-2 ">Description
                     :</span><?= $res['description'] ?></p>
             <h1 class="text-success mb-4 mt-4 fs-2">Price : <?= $res['price'] ?></h1>
-            <!-- <div class="Quantity mt-4 fw-bold">
-                <span class="me-3">Quantity</span>
-                <button type="button" class="btn btn-outline-primary  py-0  bg-primary text-light fw-bold" id="minus"
-                    data-mdb-ripple-color="dark" style="padding-left: 5px;padding-right:5px;cursor: pointer;">-</button>
-                <span class="me-2 ms-2 fw-bold" style="pointer-events: none;" id="quantity">1</span>
-                <button type="button" class="btn btn-outline-primary px-1 py-0 bg-primary text-light fw-bold" id="plus"
-                    style="cursor: pointer;" data-mdb-ripple-color=" dark">+</button>
-            </div> -->
+    
             <div class="detail-btns mt-5 d-flex gap-4 float-start">
-                <!-- <a href="" class="bg-primary py-2 px-4 text-white border rounded ">Buy
-                    Now</a> -->
-                <a href="add-to-cart.php?id=<?php echo $res['product_id'] ?>" class="btn btn-default add-to-cart"><i
-                        class="fa fa-shopping-cart"></i>Add
-                    to cart</a>
+                <a href="add-to-cart.php?id=<?php echo $res['product_id'] ?>" class="btn btn-default add-to-cart">
+                <i class="fa fa-shopping-cart"></i>
+                Add to cart</a>
             </div>
         </div>
     </div>
