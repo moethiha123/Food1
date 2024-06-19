@@ -63,13 +63,11 @@
                     <a class="nav-link" href="about.php">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="projects.php">Projects</a>
+                    <a class="nav-link" href="project.php">Projects</a>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link" href="products.php">Products</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="services.php">Services</a>
+                    <a class="nav-link" href="service.php">Services</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
