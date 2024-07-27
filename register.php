@@ -1,103 +1,105 @@
 <?php
-// DATABAST FILE MUST PUT FIRST
-require "./database/db.php";
-require "./partials/header.php";
-
-
-$date = new DateTime('now');
-$now = $date->format("Y-m-d H:i:s");
+include "./database/db.php";
 $errors = [];
-if ($_SERVER['REQUEST_METHOD'] === "POST") {
-    if (isset($_POST['register'])) {
-        $name = trim($_POST['name']);
-        $email = trim($_POST['email']);
-        $password = trim($_POST['password']);
-        $password = password_hash($password, PASSWORD_BCRYPT);
-        $address = trim($_POST['address']);
-        $pname = $_FILES['photo']['name'];
-        $tmpname = $_FILES['photo']['tmp_name'];
-        move_uploaded_file($tmpname, "Image/$pname");
-        // check error part by empty method
-        // empty() = Determine whether a variable is empty
-        empty($name) ? $errors[] = "name required..." : "";
-        empty($email) ? $errors[] = "email required..." : "";
-        empty($password) ? $errors[] = "password required..." : "";
-        empty($address) ? $errors[] = "address required..." : "";
-        empty($pname) ? $errors[] = "photo required..." : "";
-        // if var is empty ? | error="..required.." | : "";
+$now = new DateTime('now');
+$now = $now->format('Y-m-d H:i:s');
+if (isset($_POST['register'])) {
+    // echo "OK";
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $password = password_hash($password, PASSWORD_BCRYPT);
 
-
-        // Give error if email is already existed
-        if (count($errors) === 0) {
-            // select from database
-            $email_check_qry = "SELECT * FROM users WHERE email=:email";
-            // add require db.php which contains $pdo
-            $statement = $pdo->prepare($email_check_qry);
-            // bind 
-            $statement->bindParam(":email", $email, PDO::PARAM_STR);
-            // execute
-            $statement->execute();
-            // fetch data of already existed email 
-            $res = $statement->fetch();
-            if ($res) {
-                // call errors array to show error alert by string
-                $errors[] = "Email Already Exist";
-            } else {
-                // if user registers with new email which hasn't exist in our database
-                // work/write code for registration process
-                // built query first to add/store data
-                $qry = "INSERT INTO users (name,email,password,address,photo,created_date,updated_date) VALUES (:name,:email,:password,:address,:photo,:created_date,:updated_date)";
-                $s = $pdo->prepare($qry);
-                $s->bindParam(":name", $name, PDO::PARAM_STR);
-                $s->bindParam(":email", $email, PDO::PARAM_STR);
-                $s->bindParam(":password", $password, PDO::PARAM_STR);
-                $s->bindParam(":address", $address, PDO::PARAM_STR);
-                $s->bindParam(":photo", $pname, PDO::PARAM_STR);
-                // $pname > var you named
-                $s->bindParam(":created_date", $now, PDO::PARAM_STR);
-                $s->bindParam(":updated_date", $now, PDO::PARAM_STR);
-
-                // execute
-                if ($s->execute()) {
-                    // Redirect to login.php
-                    header("location:login.php");
-                } else {
-                    $errors[]  = "Oops! Something went wrong. db insert error!.";
-                }
-            }
+    $phone = $_POST['phone'];
+    $address = $_POST['address'];
+    $gender = $_POST['gender'];
+    $photoName = $_FILES['photo']['name'];
+    $photoTMP = $_FILES['photo']['tmp_name'];
+    move_uploaded_file($photoTMP, "img/$photoName");
+    empty($name) ? $errors[] = "name require" : "";
+    empty($email) ? $errors[] = "email require" : "";
+    empty($password) ? $errors[] = "password require" : "";
+    empty($phone) ? $errors[] = "phone require" : "";
+    empty($gender) ? $errors[] = "gender require" : "";
+    empty($photoName) ? $errors[] = "photo require" : "";
+    if (count($errors) === 0) {
+        $emailCheck = "SELECT * FROM users WHERE email= :email";
+        $statement = $pdo->prepare($emailCheck);
+        $statement->bindParam(':email', $email, PDO::PARAM_STR);
+        $res = $statement->execute();
+        $res = $statement->rowCount();
+        if ($res === 1) {
+            $errors[] = "email already exists";
+        } else {
+            $sql = "INSERT INTO users (name,email,password,phone,address,gender,photo,created_date,updated_date) VALUES (:name,:email,:password,:phone,:address,:gender,:photo,:created_date,:updated_date)";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam('name', $name, PDO::PARAM_STR);
+            $stmt->bindParam('email', $email, PDO::PARAM_STR);
+            $stmt->bindParam('password', $password, PDO::PARAM_STR);
+            $stmt->bindParam('phone', $phone, PDO::PARAM_STR);
+            $stmt->bindParam('address', $address, PDO::PARAM_STR);
+            $stmt->bindParam('gender', $gender, PDO::PARAM_STR);
+            $stmt->bindParam('photo', $photoName, PDO::PARAM_STR);
+            $stmt->bindParam('created_date', $now, PDO::PARAM_STR);
+            $stmt->bindParam('updated_date', $now, PDO::PARAM_STR);
+            $stmt->execute();
+            header("location:login.php");
         }
+    } else {
+        $errors[] = "error occured";
     }
 }
-require "./partials/navbar.php";
-?>
-<div class="main p-5 ">
-    <form action="register.php" class="w-50 m-auto p-5 m-5 shadow" method="post" enctype="multipart/form-data">
-        <!-- input type="file" / ပုံပါရင် မဖြစ်မနေ enctype="multipartထည့် -->
-        <?php require("./partials/errors.php");  ?>
-        <!-- join error where you wanna show error alert in html -->
-        <h1 class="text-center mb-5">Register Form</h1>
-        <div class="mb-3">
-            <input type="text" placeholder="Name.." name="name" class="form-control">
-        </div>
-        <div class="mb-3">
-            <input type="email" placeholder="Email.." name="email" class="form-control">
-        </div>
-        <div class="mb-3">
-            <input type="password" placeholder="Password.." name="password" class="form-control">
-        </div>
-        <div class="mb-3">
-            <label for="">Photo</label>
-            <input type="file" name="photo" class="form-control">
-        </div>
-        <div class="mb-3">
-            <textarea name="address" class="form-control" placeholder="Address"></textarea>
-        </div>
-        <input type="submit" value="Register" name="register" class="btn btn-primary ">
-    </form>
-</div>
 
-<?php
-
-require "./partials/footer.php";
+include "./partials/header.php";
+include "./partials/navbar.php";
+// include "./partials/carousel.php";
 
 ?>
+<h1 style="text-align: center;">Register Page</h1>
+<form action="register.php" method="post" enctype="multipart/form-data" class="w-50 m-auto my-5 p-5 shadow">
+    <?php
+    foreach ($errors as $key => $err) {
+        echo "<div class='alert alert-danger'>$err</div>";
+    }
+    ?>
+    <div class="mb-3">
+        <input type="text" name="name" placeholder="Name" class="form-control"><br>
+
+    </div>
+    <div class="mb-3">
+        <input type="email" name="email" placeholder="Email" class="form-control"><br>
+
+    </div>
+    <div class="mb-3">
+        <input type="password" name="password" placeholder="Password" class="form-control"><br>
+    </div>
+    <div class="mb-3">
+        <textarea name="address" placeholder="Address" class="form-control"></textarea>
+    </div>
+    <div class="mb-3">
+        <input type="text" name="phone" placeholder="Phone" class="form-control"><br>
+    </div>
+    <div class="mb-3">
+        <input type="file" name="photo"><br>
+
+    </div>
+    <div class="mb-3">
+        <p for>Select gender</p>
+        <input type="radio" name="gender" value="male">Male
+        <input type="radio" name="gender" value="female">Female
+    </div>
+    <div class="text-center">
+        <button type="Submit" name="register" class="btn btn-primary">Submit</button><br>
+    </div>
+
+
+
+
+
+
+
+
+
+</form>
+
+<?php require "./partials/footer.php";

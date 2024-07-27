@@ -16,10 +16,10 @@ if (isset($_POST['deliver'])) {
     <thead>
         <tr>
             <th scope="col">No</th>
-            <th scope="col">CustomerName</th>
+            <th scope="col">FoodName</th>
             <th scope="col">CustomerPhonenumber</th>
-            <th scope="col">Product_Id</th>
-            <th scope="col">Product_Photo</th>
+            <th scope="col">Food_Id</th>
+            <th scope="col">Food_Photo</th>
             <th scope="col">Date</th>
             <th scope="col">Status</th>
             <th scope="col">Action</th>
@@ -39,7 +39,7 @@ if (isset($_POST['deliver'])) {
                 <th scope="row"><?= $value['name'] ?></th>
                 <td scope="row"><?= $value['phone'] ?></td>
                 <?php
-                $qry = "SELECT order_items.*, products.name,products.photo FROM order_items LEFT JOIN products ON order_items.product_id = products.product_id WHERE order_items.customer_id = :customer_id";
+                $qry = "SELECT order_items.*, products.photo FROM order_items LEFT JOIN products ON order_items.product_id = products.product_id WHERE order_items.customer_id = :customer_id";
                 $s = $pdo->prepare($qry);
                 $s->bindParam(":customer_id", $customer_id, PDO::PARAM_INT);
                 $s->execute();
@@ -47,10 +47,10 @@ if (isset($_POST['deliver'])) {
                 // print_r($rr);
                 foreach ($rr as $key => $vv) :
                 ?>
-                <td class="bg-success d-flex flex-column">
-                    <td scope="row"><?= $vv['name'] ?></td>
+                    <td class="bg-success d-flex flex-column">
+
                     <td scope="row"><img src="./Product-Image/<?= $vv['photo'] ?>" width="60" alt=""></td>
-                </td>
+                    </td>
                 <?php endforeach ?>
                 <td scope="row"><?= $value['created_date'] ?></td>
 

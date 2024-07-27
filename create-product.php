@@ -47,7 +47,7 @@ require "./partials/navbar.php";
 <div class="main p-5 ">
     <form action="create-product.php" class="w-50 m-auto p-5 m-5 shadow" method="post" enctype="multipart/form-data">
         <?php require("./partials/errors.php");  ?>
-        <h1 class="text-center mb-5">Add Product</h1>
+        <h1 class="text-center mb-5">Add Foods</h1>
         <div class="mb-3">
             <select name="category_id" class="form-control">
                 <option value="">Select Category Name</option>
@@ -57,9 +57,9 @@ require "./partials/navbar.php";
                 $s->execute();
                 $res = $s->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($res as $key => $value) { ?>
-                <option value="<?= $value['category_id'] ?>" class="form-control">
-                    <?= $value['name'] ?>
-                </option>
+                    <option value="<?= $value['category_id'] ?>" class="form-control">
+                        <?= $value['name'] ?>
+                    </option>
                 <?php } ?>
             </select>
         </div>

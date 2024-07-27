@@ -17,7 +17,7 @@ require "./partials/navbar.php";
 
 <div class="main p-5 ">
     <form action="product-update.php" class="w-50 m-auto p-5 m-5 shadow" method="post" enctype="multipart/form-data">
-        <?php require("./partials/errors.php");  ?>
+
         <!-- join error where you wanna show error alert in html -->
         <h1 class="text-center mb-5">Edit Product Details</h1>
         <input type="hidden" name="pid" value="<?php echo $product['category_id'] ?>">
@@ -52,7 +52,7 @@ require "./partials/navbar.php";
                 <input type="text" placeholder="Price.." name="price" value="<?= $product['price'] ?>" class="form-control">
             </div>
             <div class="mb-3">
-                <?php if ($product['featured'] == 1) : ?>
+                <?php if ($product['is_featured'] == 1) : ?>
                     <input type="checkbox" name="featured" checked value="1">
                 <?php else : ?>
                     <input type="checkbox" name="featured" value="1">
