@@ -82,4 +82,3 @@ require "./partials/navbar.php";
     <!-- Submit button -->
     <button type="submit" name="order" class="btn btn-primary btn-block mb-4">Order</button>
 </form>
-<?php require "./partials/footer.php" ?>

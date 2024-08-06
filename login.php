@@ -24,7 +24,8 @@ if (isset($_POST['login'])) {
         }
         if ($res) {
             if (password_verify($password, $res['password']) && $email === $res['email']) {
-                $_SESSION['name'] = ['name'];
+                $_SESSION['name'] = $res['name'];
+                $_SESSION['id'] = $res['id'];
                 $_SESSION['photo'] = $res['photo'];
                 header("location:index.php");
             } else {

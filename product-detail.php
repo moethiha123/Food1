@@ -54,5 +54,3 @@ $res = $s->fetch(PDO::FETCH_ASSOC);
         console.log(no);
     })
 </script>
-
-<?php require "./partials/footer.php" ?>

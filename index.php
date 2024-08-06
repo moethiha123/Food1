@@ -2,9 +2,7 @@
 session_start();
 $name = isset($_SESSION['name']);
 require "./database/db.php";
-require "./partials/header.php";
-require "./partials/navbar.php";
-require "./partials/carousel.php";
+
 
 
 
@@ -62,6 +60,9 @@ if (isset($_POST['submit'])) {
     // $s->execute();
     // $res = $s->fetchAll(PDO::FETCH_ASSOC);
 }
+require "./partials/header.php";
+require "./partials/navbar.php";
+require "./partials/carousel.php";
 ?>
 
 
@@ -170,14 +171,35 @@ if (isset($_POST['submit'])) {
                 </div>
             </div>
         </div>
-        <style>
-        h2 {
-            text-align: center;
-            text-decoration: underline;
-        }
-        </style>
 
 
-        <?php
-        require "./partials/footer.php";
-        ?>
+
+
+
+        <div class="w-50 m-auto p-5 text-center shadow-lg mt-5">
+            <h2>Reviews</h2>
+            <form action="customer-review.php" method="post">
+                <input type="hidden" class="form-control" name="user_id" value="3">
+                <input type="hidden" class="form-control" name="food_id" value="1">
+                <div class="mb-3">
+                    <label for="">Description</label>
+                    <textarea class="form-control" name="description" id=""></textarea>
+                </div>
+                <div class="mb-3">
+
+                    <label for="">rating</label>
+                    <input type="range" name="rating" min="1" max="5" value="1">
+                </div>
+                <input type="submit" value="submit" name="submit">
+            </form>
+        </div>
+
+
+
+
+
+
+
+
+
+        <?php require "./partials/footer.php" ?>

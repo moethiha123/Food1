@@ -42,6 +42,9 @@ echo $auth;
         <div class="px-5 py-2">
             <?php require("./backend/product.php") ?>
         </div>
+        <div class="px-5 py-2">
+            <?php require("./review/review.php") ?>
+        </div>
 
     </div>
 </div>
