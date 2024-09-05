@@ -1,7 +1,7 @@
 <?php
 include "./partials/header.php";
 include "./partials/navbar.php";
-// include "./partials/carousel.php";
+include "./partials/carousel.php";
 ?>
 <html>
 
@@ -341,7 +341,7 @@ include "./partials/navbar.php";
                     </p>
                     <br>
 
-                    <a href="#" class="btn btn-primary">Order Now</a>
+
                 </div>
             </div>
 
@@ -358,7 +358,7 @@ include "./partials/navbar.php";
                     </p>
                     <br>
 
-                    <a href="#" class="btn btn-primary">Order Now</a>
+
                 </div>
             </div>
 

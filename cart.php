@@ -17,7 +17,7 @@ if (isset($_POST['order'])) {
     move_uploaded_file($photoTMP, "img/$photoName");
     $status = 0;
 
-    $sql = "INSERT INTO customers (customer_id,name,email,phone,address,status,created_date,updated_date,customer_photo) VALUES (null,:name,:email,:phone,:address,:status,:created_date,:updated_date,:customer_photo)";
+    $sql = "INSERT INTO customers (customer_id,name,email,phone,address,status,created_date,updated_date) VALUES (null,:name,:email,:phone,:address,:status,:created_date,:updated_date)";
     $s = $pdo->prepare($sql);
     $s->bindParam(":name", $name, PDO::PARAM_STR);
     $s->bindParam(":email", $email, PDO::PARAM_STR);
@@ -26,7 +26,7 @@ if (isset($_POST['order'])) {
     $s->bindParam(":status", $status, PDO::PARAM_STR);
     $s->bindParam(":created_date", $date, PDO::PARAM_STR);
     $s->bindParam(":updated_date", $date, PDO::PARAM_STR);
-    $s->bindParam(':customer_photo', $photoName, PDO::PARAM_STR);
+
 
     $s->execute();
     // die("here");
@@ -73,10 +73,6 @@ require "./partials/navbar.php";
 
     <div class="form-outline  mb-4">
         <textarea name="address" class="form-control">Address</textarea>
-    </div>
-    <div class="form-outline mb-4">
-        <input type="file" name="photo"><br>
-
     </div>
 
     <!-- Submit button -->

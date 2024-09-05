@@ -29,8 +29,8 @@ function search_query($cid)
 if (isset($_POST['submit'])) {
     $keyword = $_POST['search'];
     $keyword = "%$keyword%";
-    // $record_per_page = 5; // Number of items to display per page
-    // $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+    $record_per_page = 5; // Number of items to display per page
+    $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
     $start_page = ($page - 1) * $record_per_page;
     $user_qry = "SELECT * FROM products WHERE name LIKE :keyword";
     $s = $pdo->prepare($user_qry);
@@ -70,22 +70,21 @@ require "./partials/carousel.php";
     <div class="row g-4">
         <h3 class="text-danger">Foods</h3>
         <?php foreach ($res as $key => $value) : ?>
-        <div class="col-lg-3 col-md-4 col-sm-12">
-            <div class="card ">
-                <div class="bg-image hover-overlay ripple overflow-hidden shadow" data-mdb-ripple-color="light">
-                    <img src="./Image/<?= $value['photo'] ?>" class="img-fluid"
-                        style="width:100%;height:300px;object-fit:cover;" />
-                    <a href="#!">
-                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                    </a>
-                </div>
-                <div class="card-body shadow">
-                    <h5 class="card-title mb-3"><?= $value['name'] ?></h5>
-                    <!-- create new product detail file -->
-                    <a href="product-detail.php?id=<?= $value['product_id'] ?>" class="btn btn-primary">Detail</a>
+            <div class="col-lg-3 col-md-4 col-sm-12">
+                <div class="card ">
+                    <div class="bg-image hover-overlay ripple overflow-hidden shadow" data-mdb-ripple-color="light">
+                        <img src="./Image/<?= $value['photo'] ?>" class="img-fluid" style="width:100%;height:300px;object-fit:cover;" />
+                        <a href="#!">
+                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                        </a>
+                    </div>
+                    <div class="card-body shadow">
+                        <h5 class="card-title mb-3"><?= $value['name'] ?></h5>
+                        <!-- create new product detail file -->
+                        <a href="product-detail.php?id=<?= $value['product_id'] ?>" class="btn btn-primary">Detail</a>
+                    </div>
                 </div>
             </div>
-        </div>
         <?php endforeach ?>
     </div>
     <section id="team" class="sectionpadding">
@@ -99,8 +98,7 @@ require "./partials/carousel.php";
             <div class="row">
                 <div class="col-md-3">
                     <div class="card text-center p-2">
-                        <img src="ic/team-1.jpg" alt="" class="rounded-circle m-auto"
-                            style="width: 150px;height: 150px;">
+                        <img src="ic/team-1.jpg" alt="" class="rounded-circle m-auto" style="width: 150px;height: 150px;">
                         <div class="card-body">
                             <p>Jack Wilson</p>
                             <p>He is the our restaurant owner.His Name is Jack Wilson.He opened our Restaurant in 2023
@@ -116,8 +114,7 @@ require "./partials/carousel.php";
                 </div>
                 <div class="col-md-3">
                     <div class="card text-center p-2">
-                        <img src="ic/download.jfif" alt="" class="rounded-circle m-auto"
-                            style="width: 150px;height: 150px;">
+                        <img src="ic/download.jfif" alt="" class="rounded-circle m-auto" style="width: 150px;height: 150px;">
                         <div class="card-body">
                             <p>Jack</p>
                             <p>He is the chef leader in our restaurant.He has born in 1972 December.He is the famous
@@ -135,8 +132,7 @@ require "./partials/carousel.php";
 
                 <div class="col-md-3">
                     <div class="card text-center p-2">
-                        <img src="ic/team-4.jpg" alt="" class="rounded-circle m-auto"
-                            style="width: 150px;height: 150px;">
+                        <img src="ic/team-4.jpg" alt="" class="rounded-circle m-auto" style="width: 150px;height: 150px;">
                         <div class="card-body">
                             <p>Aizbel</p>
                             <p>She is the our restaurant Manager.Her Age is 22.She is borned in February 2002.She worked
@@ -153,8 +149,7 @@ require "./partials/carousel.php";
                 </div>
                 <div class="col-md-3">
                     <div class="card text-center p-2">
-                        <img src="./images/download (1).jfif" alt="" class="rounded-circle m-auto"
-                            style="width: 150px;height: 150px;">
+                        <img src="./images/download (1).jfif" alt="" class="rounded-circle m-auto" style="width: 150px;height: 150px;">
                         <div class="card-body">
                             <p>Jack</p>
                             <p>He is the good waiter in our restaurant.He has born in 1979 December.He is the famous
