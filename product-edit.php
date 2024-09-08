@@ -30,14 +30,14 @@ require "./partials/navbar.php";
                 $s->execute();
                 $res = $s->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($res as $key => $value) { ?>
-                <?php if ($value['category_id'] === $product['category_id']) : ?>
-                <option selected value="<?= $value['category_id'] ?>" class="form-control">
-                    <?= $value['name'] ?></option>
-                <?php else : ?>
-                <option value="<?= $value['category_id'] ?>">
-                    <?= $value['name'] ?>
-                </option>
-                <?php endif ?>
+                    <?php if ($value['category_id'] === $product['category_id']) : ?>
+                        <option selected value="<?= $value['category_id'] ?>" class="form-control">
+                            <?= $value['name'] ?></option>
+                    <?php else : ?>
+                        <option value="<?= $value['category_id'] ?>">
+                            <?= $value['name'] ?>
+                        </option>
+                    <?php endif ?>
                 <?php } ?>
             </select>
         </div>
@@ -54,9 +54,9 @@ require "./partials/navbar.php";
             </div>
             <div class="mb-3">
                 <?php if ($product['is_featured'] == 1) : ?>
-                <input type="checkbox" name="featured" checked value="1">
+                    <input type="checkbox" name="featured" checked value="1">
                 <?php else : ?>
-                <input type="checkbox" name="featured" value="1">
+                    <input type="checkbox" name="featured" value="1">
                 <?php endif ?>
                 <label for="">Feature</label>
             </div>
