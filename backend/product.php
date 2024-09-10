@@ -1,5 +1,5 @@
 <h3 id="products" class="mb-4 text-danger">Products</h3>
-<a href="create-product.php" class="btn btn-primary ">Create Product</a>
+<a href="create-product.php" class="btn btn-primary ">Create Food</a>
 <table class="table align-middle mb-0 bg-white">
     <thead class="bg-light">
         <tr class="text-primary">
@@ -26,32 +26,34 @@
 
         foreach ($allProducts as $key => $product) :
         ?>
-            <tr>
-                <td>
-                    <?php echo $product['product_id'];  ?>
-                </td>
-                <td>
-                    <p class="fw-bold mb-1"><?= $product['name'] ?></p>
-                </td>
-                <td>
-                    <p class="fw-bold mb-1"><?= $product['is_featured'] === 1 ? 'Featured' :'Not Featured' ?></p>
-                </td>
-                <td>
-                    <p class="fw-normal mb-1"><?= $product['description'] ?></p>
-                </td>
-                <td>
-                    <p class="fw-bold mb-1"><?= $product['price'] ?></p>
-                </td>
-                <td>
-                    <img src="./Image/<?= $product['photo'] ?>" alt="" style="width: 50px;height:50px;object-fit:cover;" class="rounded-circle" />
-                </td>
-                <td class="d-flex">
-                    <a href="product-edit.php?id=<?= $product['product_id'] ?>" class="btn btn-sm btn-primary me-2">Edit</a>
-                    <a href="delete.php?id=<?= $product['product_id'] ?>&tbname=products&tbid=product_id" class="btn btn-sm btn-danger" onclick="alert('are you sure?')">Delete</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                <?php echo $product['product_id'];  ?>
+            </td>
+            <td>
+                <p class="fw-bold mb-1"><?= $product['name'] ?></p>
+            </td>
+            <td>
+                <p class="fw-bold mb-1"><?= $product['is_featured'] === 1 ? 'Featured' : 'Not Featured' ?></p>
+            </td>
+            <td>
+                <p class="fw-normal mb-1"><?= $product['description'] ?></p>
+            </td>
+            <td>
+                <p class="fw-bold mb-1"><?= $product['price'] ?></p>
+            </td>
+            <td>
+                <img src="./Image/<?= $product['photo'] ?>" alt="" style="width: 50px;height:50px;object-fit:cover;"
+                    class="rounded-circle" />
+            </td>
+            <td class="d-flex">
+                <a href="product-edit.php?id=<?= $product['product_id'] ?>" class="btn btn-sm btn-primary me-2">Edit</a>
+                <a href="delete.php?id=<?= $product['product_id'] ?>&tbname=products&tbid=product_id"
+                    class="btn btn-sm btn-danger" onclick="alert('are you sure?')">Delete</a>
+            </td>
+        </tr>
     </tbody>
-<?php endforeach ?>
+    <?php endforeach ?>
 </table>
 
 <div class="pagination m-auto " style="width: fit-content;">
