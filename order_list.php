@@ -34,11 +34,11 @@ if (isset($_POST['deliver'])) {
         foreach ($res as $key => $value) :
             $customer_id = $value['customer_id'];
         ?>
-            <tr>
-                <th scope="row"><?= ++$key ?></th>
-                <th scope="row"><?= $value['name'] ?></th>
-                <td scope="row"><?= $value['phone'] ?></td>
-                <?php
+        <tr>
+            <th scope="row"><?= ++$key ?></th>
+            <th scope="row"><?= $value['name'] ?></th>
+            <td scope="row"><?= $value['phone'] ?></td>
+            <?php
                 $qry = "SELECT order_items.*, products.photo FROM order_items LEFT JOIN products ON order_items.product_id = products.product_id WHERE order_items.customer_id = :customer_id";
                 $s = $pdo->prepare($qry);
                 $s->bindParam(":customer_id", $customer_id, PDO::PARAM_INT);
@@ -47,22 +47,22 @@ if (isset($_POST['deliver'])) {
                 // print_r($rr);
                 foreach ($rr as $key => $vv) :
                 ?>
-                    <td class="bg-success d-flex flex-column">
+            <td class="bg-success d-flex flex-column">
 
-                    <td scope="row"><img src="./Product-Image/<?= $vv['photo'] ?>" width="60" alt=""></td>
-                    </td>
-                <?php endforeach ?>
-                <td scope="row"><?= $value['created_date'] ?></td>
+            <td scope="row"><img src="./Product-Image/<?= $vv['photo'] ?>" width="60" alt=""></td>
+            </td>
+            <?php endforeach ?>
+            <td scope="row"><?= $value['created_date'] ?></td>
 
-                <td scope="row"><?= $value['status'] == 0 ? "Undelivered" : "Delivered"  ?></td>
-                <td>
-                    <form action="order_list.php" method="post">
-                        <input type="hidden" name="status" value="1">
-                        <input type="hidden" name="cid" value="<?= $value['customer_id'] ?>">
-                        <input type="submit" value="Make Delivery" name="deliver">
-                    </form>
-                </td>
-            </tr>
+            <td scope="row"><?= $value['status'] == 0 ? "Undelivered" : "Delivered"  ?></td>
+            <td>
+                <form action="order_list.php" method="post">
+                    <input type="hidden" name="status" value="1">
+                    <input type="hidden" name="cid" value="<?= $value['customer_id'] ?>">
+                    <input type="submit" value="Make Delivery" name="deliver">
+                </form>
+            </td>
+        </tr>
         <?php endforeach ?>
     </tbody>
 </table>

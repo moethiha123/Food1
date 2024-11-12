@@ -5,14 +5,13 @@ $auth = isset($_SESSION['admin']);
 require("./backend/create-cat.php");
 // require "./partials/carousel.php";
 require "./partials/header.php";
-// require "./partials/navbar.php";
-echo $auth;
+// require "./partials/navbar.php";                        
 
 ?>
 
 <?php if ($auth) : ?>
 <div class="row m-0 p-4">
-    <div class="col-md-3 text-center shadow">
+    <div class="col-md-3 textppppppp-center shadow">
         <h3 class="mt-2">Admin Dashboard</h3>
         <hr>
         <ul class="my-5 p-0 ">
@@ -29,6 +28,7 @@ echo $auth;
                 <a class="navbar-brand" href="#">
                     <!-- <img src="./img/mdb-transaprent-noshadows.webp" class="me-2" height="20" alt="MDB Logo"
                         loading="lazy" /> -->
+
                     <!-- <small>MyBlog</small> -->
                 </a>
             </div>
@@ -42,9 +42,7 @@ echo $auth;
         <div class="px-5 py-2">
             <?php require("./backend/product.php") ?>
         </div>
-        <div class="px-5 py-2">
-            <?php require("./review/review.php") ?>
-        </div>
+
 
     </div>
 </div>
